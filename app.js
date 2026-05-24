@@ -7,6 +7,9 @@ var logger = require('morgan');
 var passport = require('passport');
 var session = require('express-session');
 var SQLiteStore = require('connect-sqlite3')(session);
+const swaggerUi = require("swagger-ui-express");
+const swaggerFile = require("./swagger-output.json");
+const bodyParser = require("body-parser");
 
 var indexRouter = require('./routes/index');
 var authRouter = require('./routes/auth');
@@ -23,6 +26,8 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+app.use(bodyParser.json());
+app.use("/doc", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

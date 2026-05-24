@@ -11,6 +11,7 @@
   <body>
 
 	<%-include('./partials/navbar.ejs')%>
+  <%- include('./partials/loggedInAs.ejs', {username: username}) %>
     <h2 class="text-center text-primary"><i><%=hotel.Name%></i></h2>
     <h3 class="text-center">Location:</h3>
     <h4 class="text-center text-primary"><i><%=hotel.Location%></i></h4>
@@ -19,11 +20,12 @@
       <h4 class="text-center text-primary"><i><%=hotel.AvgRate%></i></h4>
     <% } else {%>
       <div class="text-center">
-        <button onclick="makeRate(1,'http\:\/\/localhost:3000\/hotels\/<%=hotel.id%>\/rate' )"  class="btn btn-success"> Rate a hotel</button>
+        <button onclick="makeRate('<%=userId%>','http\:\/\/localhost:3000\/hotels\/<%=hotel.id%>\/rate' )"  class="btn btn-success"> Rate a hotel</button>
       </div>
     <% }; %>
     <script src="../javascripts/makeRate.js"></script>
 <%-include('./partials/footer.ejs')%>
+
 
   </body>
 </html>
